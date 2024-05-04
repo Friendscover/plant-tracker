@@ -1,2 +1,14 @@
-<h1>Plants#index</h1>
-<p>I am a plant!</p>
+<h1>Your Plants</h1>
+
+<ul>
+  <% @plants.each do |plant| %>
+    <li>
+      <%= plant.name %>
+      is born on <%= plant.birthday %> and
+      was last waterd at <%= plant.last_watering %>
+    </li>
+    <li>
+        Check out more here: <%= link_to plant.name, plant %> 
+    </li>
+  <% end %>
+</ul>
