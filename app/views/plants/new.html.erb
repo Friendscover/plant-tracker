@@ -1,0 +1,28 @@
+<h1>Add a new plant to your home!</h1>
+
+<% @plant.errors.full_messages.each do |message| %>
+    <div><%= message %></div>
+<% end %>
+
+<%= form_with model: @plant do |form| %>
+  <div>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :birthday %><br>
+    <%= form.date_field :birthday %>
+  </div>
+
+  <div>
+    <%= form.label :last_watering %><br>
+    <%= form.date_field :last_watering %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to "Go back", root_path %>
