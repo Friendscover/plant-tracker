@@ -5,4 +5,10 @@
 <p> <%= @plant.last_watering %></p>
 
 <div><%= link_to "Edit Plant", edit_plant_path(@plant) %></div>
+<div><%= link_to "Destroy", plant_path(@plant), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure to delete #{@plant.name}?"
+                  } %>
+<div>
+    
 <div><%= link_to "Go back", root_path%></div>
