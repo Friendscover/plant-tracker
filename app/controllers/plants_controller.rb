@@ -21,6 +21,20 @@ class PlantsController < ApplicationController
     end
   end
 
+  def edit
+    @plant = Plant.find(params[:id])
+  end
+
+  def update
+    @plant = Plant.find(params[:id])
+  
+    if @plant.update(plant_params)
+      redirect_to @plant
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   private
     def plant_params
       params.require(:plant).permit(:name, :birthday, :last_watering)
