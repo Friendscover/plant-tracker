@@ -1,4 +1,12 @@
 <%= form_with model: plant do |form| %>
+  <% plant.images.each do |image| %>
+    <% form.hidden_field :images, multiple: true, value: image.signed_id %>
+  <% end %>
+
+  <div>
+  <%= form.file_field :images, direct_upload: true, multiple: true %>
+  </div>
+
   <div>
     <%= form.label :name %><br>
     <%= form.text_field :name %>

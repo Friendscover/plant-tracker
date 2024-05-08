@@ -12,6 +12,7 @@ class PlantsController < ApplicationController
   end
 
   def create
+    # @plant.images.attach(params[:images])
     @plant = Plant.new(plant_params)
 
     if @plant.save
@@ -44,6 +45,6 @@ class PlantsController < ApplicationController
 
   private
     def plant_params
-      params.require(:plant).permit(:name, :birthday, :last_watering)
+      params.require(:plant).permit(:name, :birthday, :last_watering, images: [])
     end
 end

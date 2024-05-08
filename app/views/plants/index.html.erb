@@ -3,6 +3,10 @@
 <ul>
   <% @plants.each do |plant| %>
     <li>
+      <% if plant.images.attached? %>
+      <% end%>
+    </li>
+    <li>
       <%= plant.name %>
       is born on <%= plant.birthday %> and
       was last waterd at <%= plant.last_watering %>

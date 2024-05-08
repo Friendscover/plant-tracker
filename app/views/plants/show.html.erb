@@ -1,8 +1,16 @@
 <h1><%= @plant.name %></h1>
 
-<p> <%= @plant.birthday %></p>
+<div>
+  <% @plant.images.each do |image| %>
+    <% if image.representable? %>
+      <%= image_tag image.representation(resize_to_limit: [400, 400]) %>
+    <% end %>
+  <% end %>
+</div>
 
-<p> <%= @plant.last_watering %></p>
+<p> <%= @plant.name %> was first seen on <%= @plant.birthday %></p>
+
+<p> The last watering has been on <%= @plant.last_watering %> </p>
 
 <div><%= link_to "Edit Plant", edit_plant_path(@plant) %></div>
 <div><%= link_to "Destroy", plant_path(@plant), data: {
