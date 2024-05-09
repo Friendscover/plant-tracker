@@ -1,0 +1,13 @@
+.plant {
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.plant-images img {
+    border-radius: 10px;
+    margin: 15px;
+}
+
+.plant-info {
+    margin: 5px;
+}
