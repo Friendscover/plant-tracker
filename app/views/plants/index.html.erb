@@ -1,20 +1,25 @@
 <h1>Your Plants</h1>
 
-<ul>
-  <% @plants.each do |plant| %>
-    <li>
-      <% if plant.images.attached? %>
-      <% end%>
-    </li>
-    <li>
-      <%= plant.name %>
-      is born on <%= plant.birthday %> and
-      was last waterd at <%= plant.last_watering %>
-    </li>
-    <li>
-        Check out more here: <%= link_to plant.name, plant %> 
-    </li>
-  <% end %>
-</ul>
+<% @plants.each do |plant| %>
+  <div>
+    <% if plant.images.attached? %>
+      <% plant.images.each do |image| %>
+        <% if image.representable? %>
+          <%= image_tag image.representation(resize_to_limit: [200, 200]) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= plant.name %>
+    is born on <%= plant.birthday %> and
+    was last waterd at <%= plant.last_watering %>
+  </div>
+  
+  <div>
+      Check out more here: <%= link_to plant.name, plant %></br>
+  </div>
+<% end %>
 
 <%= link_to "New Plant", new_plant_path %>

@@ -12,9 +12,9 @@ class PlantsController < ApplicationController
   end
 
   def create
-    # @plant.images.attach(params[:images])
     @plant = Plant.new(plant_params)
 
+    
     if @plant.save
       redirect_to @plant
     else
@@ -28,6 +28,8 @@ class PlantsController < ApplicationController
 
   def update
     @plant = Plant.find(params[:id])
+    @plant.images.attach(params[:images])
+
   
     if @plant.update(plant_params)
       redirect_to @plant
