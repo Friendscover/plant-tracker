@@ -15,5 +15,9 @@
  */
 
  body {
-    background-color: #eee;
+    background-color: #F2D0A7;
+ }
+
+ h1, h2 {
+   color: #40312C;
  }

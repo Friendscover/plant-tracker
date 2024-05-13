@@ -1,6 +1,19 @@
 .plant {
+    display: flex;
+    flex-direction: column;
+
     border-radius: 10px;
-    border: 1px solid black;
+    border: 2px solid #4E5925;
+
+    background-color: #ABBF60;
+}
+
+.plant h2 {
+    align-self: center;
+}
+
+.plant-images {
+    align-self: center;
 }
 
 .plant-images img {

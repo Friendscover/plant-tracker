@@ -4,6 +4,7 @@
   <div class="grid-container">
     <% @plants.each do |plant| %>
       <div class="plant">
+        <h2><%= plant.name %></h2>
         <div class="plant-images">
           <% if plant.images.attached? %>
             <% plant.images.each do |image| %>
