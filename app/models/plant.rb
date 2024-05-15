@@ -6,11 +6,19 @@ class Plant < ApplicationRecord
     has_many_attached :images
 
     def age
-        age = DateTime.now - DateTime.parse("#{birthday}")
-        age.to_i
+        days_parser(birthday).to_i
     end
 
     def birth
         self.birthday.strftime("%Y/%m/%d")
+    end
+
+    def days_since_watering
+        days_parser(last_watering).to_i
+    end
+
+    private
+    def days_parser(date)
+        days = DateTime.now - DateTime.parse("#{date}")
     end
 end
