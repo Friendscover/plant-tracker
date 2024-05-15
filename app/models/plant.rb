@@ -19,6 +19,6 @@ class Plant < ApplicationRecord
 
     private
     def days_parser(date)
-        days = DateTime.now - DateTime.parse("#{date}")
+        DateTime.now - DateTime.parse("#{date}")
     end
 end
