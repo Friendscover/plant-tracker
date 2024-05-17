@@ -13,10 +13,6 @@ class Plant < ApplicationRecord
         self.birthday.strftime("%Y/%m/%d")
     end
 
-    def days_since_watering
-        days_parser(last_watering).to_i
-    end
-
     private
     def days_parser(date)
         DateTime.now - DateTime.parse("#{date}")

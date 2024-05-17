@@ -1,4 +1,4 @@
-<div class=flex-container>
+<div class="flex-container">
   <h1>Your Plants</h1>
 
   <div class="grid-container">
@@ -19,7 +19,7 @@
 
         <div class="plant-info">
           <p> <%= plant.name %> started growing on <%= plant.birth %>.</p>
-          <p> It was last waterd <%= plant.days_since_watering %> days ago.</p>
+          <p> It was last watered <%= time_ago_in_words(plant.last_watering)%> ago.</p>
           <p> Check out more here: <%= link_to plant.name, plant %></p>
         </div>
       </div>
