@@ -10,6 +10,7 @@
 
 .plant h2, .plant h1 {
     align-self: center;
+    margin: 20px;
 }
 
 .plant-images {
@@ -23,4 +24,41 @@
 
 .plant-info {
     margin: 5px;
+}
+
+.plant-edit {
+    margin: 5px;
+}
+
+.plant-edit div {
+    margin: 5px;
+}
+
+.plant-edit div input {
+    color: #40312C;
+    background-color: #F2D0A7;
+    border-style: none;
+
+    border-radius: 10px;
+    margin: 5px;
+    height: 45px;
+    width: 200px;
+    padding-left: 10px;
+}
+
+.plant-edit div input:focus {
+    outline: #40312C solid 2px;
+}
+
+.plant-edit div input[type="submit"], .plant-edit div input[id="plant_images"] {
+    color: #F2D0A7;
+    background-color: #40312C;
+
+    border: none;
+    text-align: center;
+}
+
+.plant-edit div input[id="plant_images"] {
+    padding: 2rem;
+    width: auto;
 }
