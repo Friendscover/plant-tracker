@@ -1,7 +1,13 @@
-<h1>Add a new plant to your home!</h1>
+<div class="flex-container">
+  <div class="grid-container">
+    <div class="plant">
+      <h1>Add a new plant to your home!</h1>
 
-<%= render "error_display", plant: @plant %>
+      <%= render "error_display", plant: @plant %>
 
-<%= render "form", plant: @plant %>
+      <%= render "form", plant: @plant %>
 
-<%= link_to "Go back", root_path %>
+    </div>
+    <%= link_to "Go back", root_path %>
+  </div>
+</div>
