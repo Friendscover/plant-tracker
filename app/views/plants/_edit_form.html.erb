@@ -2,27 +2,34 @@
   <% plant.images.each do |image| %>
     <%= form.hidden_field :images, multiple: true, value: image.signed_id %>
   <% end %>
+  <div class="plant-edit">
+    <div>
+      <%= form.file_field :images, direct_upload: true, multiple: true %>
+    </div>
 
-  <div>
-    <%= form.file_field :images, direct_upload: true, multiple: true %>
-  </div>
+    <div>
+      <%= form.label :name %>
+    </div>
+    <div>
+      <%= form.text_field :name %>
+    </div>
 
-  <div>
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
-  </div>
+    <div>
+      <%= form.label :birthday %>
+    </div>
+    <div>
+      <%= form.date_field :birthday %>
+    </div>
 
-  <div>
-    <%= form.label :birthday %><br>
-    <%= form.date_field :birthday %>
-  </div>
+    <div>
+      <%= form.label :last_watering %>
+    </div>
+    <div>
+      <%= form.date_field :last_watering %>
+    </div>
 
-  <div>
-    <%= form.label :last_watering %><br>
-    <%= form.date_field :last_watering %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <div>
+      <%= form.submit %>
+    </div>
   </div>
 <% end %>

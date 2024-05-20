@@ -1,25 +1,30 @@
-<h1>Your Plants</h1>
+<div class="flex-container">
+  <h1>Your Plants</h1>
 
-<% @plants.each do |plant| %>
-  <div>
-    <% if plant.images.attached? %>
-      <% plant.images.each do |image| %>
-        <% if image.representable? %>
-          <%= image_tag image.representation(resize_to_limit: [200, 200]) %>
-        <% end %>
-      <% end %>
+  <div class="grid-container">
+    <% @plants.each do |plant| %>
+      <div class="plant">
+        <h2><%= plant.name %></h2>
+        <div class="plant-images">
+          <% if plant.images.attached? %>
+            <% plant.images.each do |image| %>
+              <% if image.representable? %>
+                <%= link_to plant do %>
+                  <%= image_tag image.representation(resize_to_limit: [250, 250]) %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div class="plant-info">
+          <p> <%= plant.name %> started growing on <%= plant.birth %>.</p>
+          <p> It was last watered <%= time_ago_in_words(plant.last_watering)%> ago.</p>
+          <p> Check out more here: <%= link_to plant.name, plant %></p>
+        </div>
+      </div>
     <% end %>
   </div>
+  <%= link_to "New Plant", new_plant_path %>
+</div>
 
-  <div>
-    <%= plant.name %>
-    is born on <%= plant.birthday %> and
-    was last waterd at <%= plant.last_watering %>
-  </div>
-  
-  <div>
-      Check out more here: <%= link_to plant.name, plant %></br>
-  </div>
-<% end %>
-
-<%= link_to "New Plant", new_plant_path %>

@@ -1,7 +1,13 @@
-<h1>Edit a plant in your collection!</h1>
+<div class="flex-container">
+  <div class="grid-container">
+    <div class="plant">
+      <h1>Edit a plant in your collection!</h1>
 
-<%= render "error_display", plant: @plant %>
+      <%= render "error_display", plant: @plant %>
 
-<%= render "edit_form", plant: @plant %>
+      <%= render "edit_form", plant: @plant %></div>
 
-<%= link_to "Go back", plant_path %>
+      <%= link_to "Go back", plant_path %>
+    </div>
+  </div>
+</div>

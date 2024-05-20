@@ -1,22 +1,25 @@
-<h1><%= @plant.name %></h1>
+<div class="flex-container">
+  <div class="grid-container">
+    <div class="plant">
+      <h1><%= @plant.name %></h1>
+      <div class="plant-images">
+        <% @plant.images.each do |image| %>
+          <% if image.representable? %>
+            <%= image_tag image.representation(resize_to_limit: [300, 300]) %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="plant-info">
+        <p> <%= @plant.name %> started growing on <%= @plant.birth %>.</p>
+        <p> It was last watered <%= time_ago_in_words(@plant.last_watering)%> ago. </p>
 
-<div>
-  <% @plant.images.each do |image| %>
-    <% if image.representable? %>
-      <%= image_tag image.representation(resize_to_limit: [400, 400]) %>
-    <% end %>
-  <% end %>
+        <div><%= link_to "Edit Plant", edit_plant_path(@plant) %></div>
+        <div><%= link_to "Destroy", plant_path(@plant), data: {
+                            turbo_method: :delete,
+                            turbo_confirm: "Are you sure to delete #{@plant.name}?"
+                          } %>
+        <div>
+        <div><%= link_to "Go back", root_path %></div>
+    </div>
+  </div>
 </div>
-
-<p> <%= @plant.name %> was first seen on <%= @plant.birthday %></p>
-
-<p> The last watering has been on <%= @plant.last_watering %> </p>
-
-<div><%= link_to "Edit Plant", edit_plant_path(@plant) %></div>
-<div><%= link_to "Destroy", plant_path(@plant), data: {
-                    turbo_method: :delete,
-                    turbo_confirm: "Are you sure to delete #{@plant.name}?"
-                  } %>
-<div>
-    
-<div><%= link_to "Go back", root_path %></div>
