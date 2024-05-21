@@ -12,6 +12,7 @@
       <div class="plant-info">
         <p> <%= @plant.name %> started growing on <%= @plant.birth %>.</p>
         <p> It was last watered <%= time_ago_in_words(@plant.last_watering)%> ago. </p>
+        <p> <%= @plant.description %>
 
         <div><%= link_to "Edit Plant", edit_plant_path(@plant) %></div>
         <div><%= link_to "Destroy", plant_path(@plant), data: {

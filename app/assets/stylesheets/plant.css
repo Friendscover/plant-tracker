@@ -34,7 +34,7 @@
     margin: 5px;
 }
 
-.plant-edit div input {
+.plant-edit div input, .plant-edit div textarea {
     color: #40312C;
     background-color: #F2D0A7;
     border-style: none;
@@ -46,8 +46,12 @@
     padding-left: 10px;
 }
 
-.plant-edit div input:focus {
+.plant-edit div input:focus, .plant-edit div textarea:focus {
     outline: #40312C solid 2px;
+}
+
+.plant-edit div textarea[id="plant_description"] {
+    height: 100px;
 }
 
 .plant-edit div input[type="submit"], .plant-edit div input[id="plant_images"] {
