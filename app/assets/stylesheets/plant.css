@@ -54,7 +54,7 @@
     height: 100px;
 }
 
-.plant-edit div input[type="submit"], .plant-edit div input[id="plant_images"] {
+.plant-edit div input[type="submit"], .plant-edit div input[id="plant_images"], .plant-info div input[type="submit"] {
     color: #F2D0A7;
     background-color: #40312C;
 
@@ -65,4 +65,10 @@
 .plant-edit div input[id="plant_images"] {
     padding: 2rem;
     width: auto;
+}
+
+.plant-info div input[type="submit"] {
+    height: 45px;
+    width: 200px;
+    border-radius: 10px;
 }
