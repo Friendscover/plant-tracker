@@ -72,3 +72,25 @@
     width: 200px;
     border-radius: 10px;
 }
+
+.plant-navigation {
+    display: flex;
+}
+
+.plant-navigation div {
+    background-color: #40312C;
+
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+
+    padding-top: 10px;
+    margin: 10px;
+    width: 150px;
+    height: 35px;
+}
+
+.plant-navigation div a {
+    color: #F2D0A7;
+    text-decoration: none;
+}
