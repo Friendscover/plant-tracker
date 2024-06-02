@@ -75,6 +75,8 @@
 
 .plant-navigation {
     display: flex;
+    position: sticky;
+    bottom: 1px;
 }
 
 .plant-navigation div {
