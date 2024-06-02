@@ -19,7 +19,7 @@
 
         <div class="plant-info">
           <p> <%= plant.name %> started growing on <%= plant.birth %>.</p>
-          <p> It was last watered <%= time_ago_in_words(plant.last_watering)%> ago.</p>
+          <p> It was last watered <%= time_ago_in_words(plant.waterings.last.created_at) %> ago.</p>
           <p> Check out more here: <%= link_to plant.name, plant %></p>
         </div>
       </div>
