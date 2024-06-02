@@ -34,7 +34,7 @@
     margin: 5px;
 }
 
-.plant-edit div input {
+.plant-edit div input, .plant-edit div textarea {
     color: #40312C;
     background-color: #F2D0A7;
     border-style: none;
@@ -46,11 +46,15 @@
     padding-left: 10px;
 }
 
-.plant-edit div input:focus {
+.plant-edit div input:focus, .plant-edit div textarea:focus {
     outline: #40312C solid 2px;
 }
 
-.plant-edit div input[type="submit"], .plant-edit div input[id="plant_images"] {
+.plant-edit div textarea[id="plant_description"] {
+    height: 100px;
+}
+
+.plant-edit div input[type="submit"], .plant-edit div input[id="plant_images"], .plant-info div input[type="submit"] {
     color: #F2D0A7;
     background-color: #40312C;
 
@@ -61,4 +65,34 @@
 .plant-edit div input[id="plant_images"] {
     padding: 2rem;
     width: auto;
+}
+
+.plant-info div input[type="submit"] {
+    height: 45px;
+    width: 200px;
+    border-radius: 10px;
+}
+
+.plant-navigation {
+    display: flex;
+    position: sticky;
+    bottom: 1px;
+}
+
+.plant-navigation div {
+    background-color: #40312C;
+
+    border: none;
+    border-radius: 10px;
+    text-align: center;
+
+    padding-top: 10px;
+    margin: 10px;
+    width: 150px;
+    height: 35px;
+}
+
+.plant-navigation div a {
+    color: #F2D0A7;
+    text-decoration: none;
 }

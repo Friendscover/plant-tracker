@@ -4,6 +4,7 @@ class Plant < ApplicationRecord
     validates :last_watering, presence: true
 
     has_many_attached :images
+    has_many :waterings
 
     def age
         days_parser(birthday).to_i
