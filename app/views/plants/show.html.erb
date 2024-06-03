@@ -11,8 +11,12 @@
       </div>
       <div class="plant-info">
         <p> <%= @plant.name %> started growing on <%= @plant.birth %>.</p>
-        <p> It was last watered <%= time_ago_in_words(@plant.waterings.last.created_at) %> ago. </p>
-        <p> <%= @plant.description %>
+        <% if @plant.waterings.any? %>
+          <p> It was last watered <%= time_ago_in_words(@plant.waterings.last.created_at) %> ago. </p>
+        <% elsif %>
+          <p> This plants has not been watered yet! </p>
+        <% end %>
+        <p> <%= @plant.description %> </p>
 
         <%= form_with model: [ @plant, @plant.waterings.build ] do |form| %>
         <div>
