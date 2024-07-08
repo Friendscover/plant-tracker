@@ -3,7 +3,7 @@ class Plant < ApplicationRecord
     validates :birthday, presence: true
 
     has_many_attached :images
-    has_many :waterings
+    has_many :waterings, dependent: :destroy
 
     def age
         days_parser(birthday).to_i
