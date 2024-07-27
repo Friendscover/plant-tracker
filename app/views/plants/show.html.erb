@@ -2,13 +2,18 @@
   <div class="grid-container">
     <div class="plant">
       <h1><%= @plant.name %></h1>
-      <div class="plant-images">
+      <div class="plant-images" data-controller="slideshow" data-slideshow-index-value="0">
+        <button data-action="slideshow#previous"> ← </button>
         <% @plant.images.each do |image| %>
-          <% if image.representable? %>
-            <%= image_tag image.representation(resize_to_limit: [300, 300]) %>
-          <% end %>
+          <div data-slideshow-target="slide">
+            <% if image.representable? %>
+              <%= image_tag image.representation(resize_to_limit: [300, 300]) %>
+            <% end %>
+          </div>
         <% end %>
+        <button data-action="slideshow#next"> → </button>
       </div>
+
       <div class="plant-info">
         <p> <%= @plant.name %> started growing on <%= @plant.birth %>.</p>
         <% if @plant.waterings.any? %>
