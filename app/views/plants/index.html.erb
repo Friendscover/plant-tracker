@@ -5,16 +5,20 @@
     <% @plants.each do |plant| %>
       <div class="plant">
         <h2><%= plant.name %></h2>
-        <div class="plant-images">
+        <div class="plant-images" data-controller="slideshow" data-slideshow-index-value="0">
+          <button data-action="slideshow#previous"> ← </button>
           <% if plant.images.attached? %>
             <% plant.images.each do |image| %>
-              <% if image.representable? %>
-                <%= link_to plant do %>
-                  <%= image_tag image.representation(resize_to_limit: [250, 250]) %>
+              <div data-slideshow-target="slide">
+                <% if image.representable? %>
+                  <%= link_to plant do %>
+                    <%= image_tag image.representation(resize_to_limit: [250, 250]) %>
+                  <% end %>
                 <% end %>
-              <% end %>
+              </div>
             <% end %>
           <% end %>
+          <button data-action="slideshow#next"> → </button>
         </div>
 
         <div class="plant-info">
