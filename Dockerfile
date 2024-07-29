@@ -1,62 +1,73 @@
 # syntax = docker/dockerfile:1
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
-ARG RUBY_VERSION=3.1.2
+ARG RUBY_VERSION=3.3.4
+FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as assets
+
+WORKDIR /plant-tracker
+
+ARG UID=1000
+ARG GID=1000
+
+RUN bash -c "set -o pipefail && apt-get update \
+  && apt-get install -y --no-install-recommends build-essential libvips curl git libpq-dev \
+  && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man \
+  && apt-get clean \
+  && groupadd -g \"${GID}\" ruby \
+  && useradd --create-home --no-log-init -u \"${UID}\" -g \"${GID}\" ruby"
+
+USER ruby
+
+COPY --chown=ruby:ruby Gemfile* ./
+RUN bundle install
+
+ARG RAILS_ENV="production"
+ENV RAILS_ENV="${RAILS_ENV}" \
+    PATH="${PATH}:/home/ruby/.local/bin:/node_modules/.bin" \
+    USER="ruby"
+
+COPY --chown=ruby:ruby . .
+
+RUN if [ "${RAILS_ENV}" != "development" ]; then \
+  SECRET_KEY_BASE_DUMMY=1 rails assets:precompile; fi
+
+CMD ["bash"]
+
+###############################################################################
+
+ARG RUBY_VERSION=3.3.4
 FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
 
-# Rails app lives here
-WORKDIR /rails
 
-# Set production environment
-ENV RAILS_ENV="production" \
-    BUNDLE_DEPLOYMENT="1" \
-    BUNDLE_PATH="/usr/local/bundle" \
-    BUNDLE_WITHOUT="development"
+WORKDIR /plant-tracker
 
+ARG UID=1000
+ARG GID=1000
 
-# Throw-away build stage to reduce size of final image
-FROM base as build
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends build-essential curl libvips libpq-dev \
+  && rm -rf /var/lib/apt/lists/* /usr/share/doc /usr/share/man \
+  && apt-get clean \
+  && groupadd -g "${GID}" ruby \
+  && useradd --create-home --no-log-init -u "${UID}" -g "${GID}" ruby \
+  && chown ruby:ruby -R /plant-tracker
 
-# Install packages needed to build gems
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libpq-dev libvips pkg-config
+USER ruby
 
-# Install application gems
-COPY Gemfile Gemfile.lock ./
-RUN bundle install && \
-    rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
-    bundle exec bootsnap precompile --gemfile
+COPY --chown=ruby:ruby bin/ ./bin
+RUN chmod 0755 bin/*
 
-# Copy application code
-COPY . .
+ARG RAILS_ENV="production"
+ENV RAILS_ENV="${RAILS_ENV}" \
+    PATH="${PATH}:/home/ruby/.local/bin" \
+    USER="ruby"
 
-# Precompile bootsnap code for faster boot times
-RUN bundle exec bootsnap precompile app/ lib/
+COPY --chown=ruby:ruby --from=assets /usr/local/bundle /usr/local/bundle
+COPY --chown=ruby:ruby --from=assets /plant-tracker/public /public
+COPY --chown=ruby:ruby . .
 
-# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
-RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
+ENTRYPOINT ["/plant-tracker/bin/docker-entrypoint"]
 
+EXPOSE 8000
 
-# Final stage for app image
-FROM base
-
-# Install packages needed for deployment
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libvips postgresql-client && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
-
-# Copy built artifacts: gems, application
-COPY --from=build /usr/local/bundle /usr/local/bundle
-COPY --from=build /rails /rails
-
-# Run and own only the runtime files as a non-root user for security
-RUN useradd rails --create-home --shell /bin/bash && \
-    chown -R rails:rails db log storage tmp
-USER rails:rails
-
-# Entrypoint prepares the database.
-ENTRYPOINT ["/rails/bin/docker-entrypoint"]
-
-# Start the server by default, this can be overwritten at runtime
-EXPOSE 3000
-CMD ["./bin/rails", "server"]
+CMD ["rails", "s"]
