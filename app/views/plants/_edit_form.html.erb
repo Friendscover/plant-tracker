@@ -4,7 +4,7 @@
   <% end %>
   <div class="plant-edit">
     <div>
-      <%= form.file_field :images, direct_upload: true, multiple: true %>
+      <%= form.file_field :images, direct_upload: true, multiple: true, capture: "user", accept: "image/*" %>
     </div>
 
     <div>
