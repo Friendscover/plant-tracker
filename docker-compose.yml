@@ -18,23 +18,6 @@ x-app: &default-app
   volumes:
     - "${DOCKER_WEB_VOLUME:-./public:/app/public}"
 
-# x-assets: &default-assets
-#   build:
-#     context: "."
-#     target: "assets"
-#     network: host
-#     args:
-#       - "UID=${UID:-1000}"
-#       - "GID=${GID:-1000}"
-#       - "RAILS_ENV=${RAILS_ENV:-production}"
-#   env_file:
-#     - ".env"
-#   profiles: ["assets"]
-#   restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
-#   stop_grace_period: "3s"
-#   volumes:
-#     - ".:/plant-tracker"
-
 services:
   postgres:
     deploy:
@@ -69,12 +52,6 @@ services:
     ports:
       - "${DOCKER_WEB_PORT_FORWARD:-127.0.0.1:8000}:${PORT:-8000}"
     profiles: ["web"]
-
-  # js:
-  #   <<: *default-assets
-
-  # css:
-  #   <<: *default-assets
 
 volumes:
   postgres: {}
