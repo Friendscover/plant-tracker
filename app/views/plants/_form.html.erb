@@ -1,6 +1,7 @@
 <%= form_with model: plant do |form| %>
   <div class="plant-edit">
     <div>
+      <%= form.label :images, "Select Images", class: "upload-button" %>
       <%= form.file_field :images, direct_upload: true, multiple: true, capture: "user", accept: "image/*" %>
     </div>
 
