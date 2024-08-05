@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   resources :plants do
     resources :waterings
   end
+
+  delete "images/:id/purge", to: "images#purge", as: "purge_image"
 end

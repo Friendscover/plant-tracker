@@ -25,3 +25,8 @@
 a {
   color: #40312C;
 }
+
+img {
+  border-radius: 10px;
+  margin: 15px;
+}

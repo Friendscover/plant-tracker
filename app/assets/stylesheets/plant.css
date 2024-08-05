@@ -19,11 +19,6 @@
     align-self: center;
 }
 
-.plant-images img {
-    border-radius: 10px;
-    margin: 15px;
-}
-
 .plant-images button {
     background-color: #40312C;
     color: #F2D0A7;
