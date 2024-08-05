@@ -13,6 +13,15 @@ class Plant < ApplicationRecord
         self.birthday.strftime("%Y/%m/%d")
     end
 
+    def images=(attachables)
+        attachables = Array(attachables).compact_blank
+
+       if attachables.any?
+         attachment_changes["images"] =
+           ActiveStorage::Attached::Changes::CreateMany.new("images", self, images.blobs + attachables)
+       end
+    end
+
     private
     def days_parser(date)
         DateTime.now - DateTime.parse("#{date}")
