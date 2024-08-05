@@ -1,5 +1,5 @@
 <% plant.images.each do |image| %>
-  <div class="plant-edit">
+  <div class="flex-container">
     <div>
       <% if image.representable? %>
           <%= image_tag image.representation(resize_to_limit: [300, 300]) %>
