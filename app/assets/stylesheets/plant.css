@@ -80,9 +80,10 @@
 }
 
 .plant-edit input[type="file"] {
-    position: absolute;
+    position: fixed;
     z-index: -1;
     opacity: 0;
+    top: 0;
   }
 
 .plant-info div input[type="submit"] {
